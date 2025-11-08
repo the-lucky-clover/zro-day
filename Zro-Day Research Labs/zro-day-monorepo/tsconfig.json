@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["packages/shared/src/*"]
+    },
+    "esModuleInterop": true,
+    "strict": true,
+    "jsx": "react-jsx",
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "dist"
+  }
+}

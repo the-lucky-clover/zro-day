@@ -1,0 +1,57 @@
+{
+     2	  "name": "zro-day-security-platform",
+     3	  "version": "1.0.0",
+     4	  "description": "Advanced browser security platform with 1950s radar operator theme",
+     5	  "type": "module",
+     6	  "scripts": {
+     7	    "dev": "vite",
+     8	    "dev:sandbox": "wrangler pages dev dist --ip 0.0.0.0 --port 3000",
+     9	    "dev:d1": "wrangler pages dev dist --d1=zro-day-production --local --ip 0.0.0.0 --port 3000",
+    10	    "build": "vite build",
+    11	    "build:extension": "vite build --config vite.extension.config.ts",
+    12	    "preview": "wrangler pages dev dist",
+    13	    "deploy": "npm run build && wrangler pages deploy dist",
+    14	    "deploy:prod": "npm run build && wrangler pages deploy dist --project-name zro-day-security",
+    15	    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    16	    "db:migrate:local": "wrangler d1 migrations apply zro-day-production --local",
+    17	    "db:migrate:prod": "wrangler d1 migrations apply zro-day-production",
+    18	    "db:seed": "wrangler d1 execute zro-day-production --local --file=./seed.sql",
+    19	    "db:reset": "rm -rf .wrangler/state/v3/d1 && npm run db:migrate:local && npm run db:seed",
+    20	    "clean-port": "fuser -k 3000/tcp 2>/dev/null || true",
+    21	    "test": "curl http://localhost:3000",
+    22	    "extension:pack": "cd extension && zip -r ../zro-day-extension.zip . -x '*.DS_Store' '*/node_modules/*'",
+    23	    "git:commit": "git add . && git commit -m",
+    24	    "git:status": "git status",
+    25	    "start": "pm2 start ecosystem.config.cjs"
+    26	  },
+    27	  "dependencies": {
+    28	    "hono": "^4.9.5",
+    29	    "@hono/jwt": "^2.1.1",
+    30	    "bcryptjs": "^2.4.3",
+    31	    "zod": "^3.23.8",
+    32	    "jose": "^5.9.6",
+    33	    "nanoid": "^5.0.9"
+    34	  },
+    35	  "devDependencies": {
+    36	    "@hono/vite-build": "^1.2.0",
+    37	    "@hono/vite-dev-server": "^0.18.2",
+    38	    "@types/bcryptjs": "^2.4.6",
+    39	    "@types/chrome": "^0.0.277",
+    40	    "@cloudflare/workers-types": "^4.20250705.0",
+    41	    "typescript": "^5.7.3",
+    42	    "vite": "^6.3.5",
+    43	    "wrangler": "^4.4.0"
+    44	  },
+    45	  "keywords": [
+    46	    "security",
+    47	    "browser-extension",
+    48	    "anti-malware",
+    49	    "cybersecurity",
+    50	    "chrome-extension",
+    51	    "cloudflare-pages",
+    52	    "hono",
+    53	    "typescript"
+    54	  ],
+    55	  "author": "ZRO-DAY Security <pounds1@gmail.com>",
+    56	  "license": "Proprietary"
+    57	}

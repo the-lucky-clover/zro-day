@@ -1,0 +1,46 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "zro-day-security",
+  "main": "src/index.tsx",
+  "compatibility_date": "2024-01-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "pages_build_output_dir": "./dist",
+
+  // D1 Database for user management and security data
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "zro-day-production",
+      "database_id": "placeholder-will-be-created-on-deploy"
+    }
+  ],
+
+  // KV for session management and real-time threat data
+  "kv_namespaces": [
+    {
+      "binding": "KV_SESSIONS",
+      "preview_id": "placeholder-sessions-preview",
+      "id": "placeholder-sessions-production"
+    },
+    {
+      "binding": "KV_THREATS", 
+      "preview_id": "placeholder-threats-preview",
+      "id": "placeholder-threats-production"
+    }
+  ],
+
+  // R2 for threat intelligence data and logs
+  "r2_buckets": [
+    {
+      "binding": "R2_THREAT_DATA",
+      "bucket_name": "zro-day-threat-intelligence"
+    }
+  ],
+
+  // Environment variables for production
+  "vars": {
+    "ENVIRONMENT": "production",
+    "JWT_SECRET_PLACEHOLDER": "will-be-set-via-secrets",
+    "GOD_ACCOUNT_EMAIL": "pounds1@gmail.com"
+  }
+}

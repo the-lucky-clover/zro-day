@@ -1,0 +1,602 @@
+// ZRO-DAY Security Platform - Main Application JavaScript
+// Advanced interactive features with 1950s radar operator theme
+
+class ZroDayApp {
+    constructor() {
+        this.threatCounter = 247891;
+        this.userCounter = 12847;
+        this.activeThreats = 0;
+        this.isAuthenticated = false;
+        this.currentUser = null;
+        
+        this.initializeApp();
+    }
+
+    initializeApp() {
+        console.log('ZRO-DAY Security Platform: Initializing...');
+        
+        // Set up event listeners
+        this.setupEventListeners();
+        
+        // Start real-time updates
+        this.startRealTimeUpdates();
+        
+        // Initialize radar display
+        this.initializeRadarDisplay();
+        
+        // Check authentication status
+        this.checkAuthStatus();
+        
+        console.log('ZRO-DAY Security Platform: Initialized');
+    }
+
+    setupEventListeners() {
+        // Login button
+        const loginBtn = document.getElementById('loginBtn');
+        if (loginBtn) {
+            loginBtn.addEventListener('click', () => this.showLoginModal());
+        }
+
+        // Install extension button
+        const installBtn = document.getElementById('installExtension');
+        if (installBtn) {
+            installBtn.addEventListener('click', () => this.handleExtensionInstall());
+        }
+
+        // Download extension button
+        const downloadBtn = document.getElementById('downloadExtension');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', () => this.handleExtensionDownload());
+        }
+
+        // Start scan button
+        const scanBtn = document.getElementById('startScan');
+        if (scanBtn) {
+            scanBtn.addEventListener('click', () => this.performQuickScan());
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add parallax effect for radar background
+        window.addEventListener('scroll', () => this.updateParallaxEffect());
+    }
+
+    startRealTimeUpdates() {
+        // Update threat counters
+        setInterval(() => {
+            this.updateThreatCounters();
+        }, 5000);
+
+        // Simulate real-time threat detection
+        setInterval(() => {
+            this.simulateThreatDetection();
+        }, 15000);
+
+        // Update active threats
+        setInterval(() => {
+            this.updateActiveThreats();
+        }, 8000);
+    }
+
+    initializeRadarDisplay() {
+        // Add random threat blips to radar display
+        this.addThreatBlips();
+        
+        // Animate existing elements
+        this.animateRadarElements();
+    }
+
+    updateThreatCounters() {
+        const threatsElement = document.getElementById('threatsBlocked');
+        const usersElement = document.getElementById('activeUsers');
+        
+        if (threatsElement) {
+            this.threatCounter += Math.floor(Math.random() * 5) + 1;
+            this.animateCounterUpdate(threatsElement, this.threatCounter);
+        }
+        
+        if (usersElement) {
+            const change = Math.floor(Math.random() * 10) - 5; // -5 to +4
+            this.userCounter = Math.max(this.userCounter + change, 1000);
+            this.animateCounterUpdate(usersElement, this.userCounter);
+        }
+    }
+
+    animateCounterUpdate(element, newValue) {
+        element.style.transform = 'scale(1.1)';
+        element.style.color = '#ffb000';
+        
+        setTimeout(() => {
+            element.textContent = newValue.toLocaleString();
+            element.style.transform = 'scale(1)';
+            element.style.color = '';
+        }, 200);
+    }
+
+    simulateThreatDetection() {
+        // Add temporary threat blip to radar
+        this.addThreatBlip(true);
+        
+        // Show brief notification
+        this.showThreatNotification();
+    }
+
+    updateActiveThreats() {
+        const activeElement = document.getElementById('realTimeAlerts');
+        if (activeElement) {
+            // Simulate active threats (usually 0-3)
+            this.activeThreats = Math.random() > 0.7 ? Math.floor(Math.random() * 4) : 0;
+            activeElement.textContent = this.activeThreats;
+            
+            // Change color based on threat level
+            if (this.activeThreats === 0) {
+                activeElement.style.color = '#00ff41';
+            } else if (this.activeThreats <= 2) {
+                activeElement.style.color = '#ffb000';
+            } else {
+                activeElement.style.color = '#ff0000';
+            }
+        }
+    }
+
+    addThreatBlips() {
+        // Add static threat blips to radar display
+        const radarContainer = document.querySelector('.radar-display');
+        if (!radarContainer) return;
+
+        for (let i = 0; i < 3; i++) {
+            this.addThreatBlip(false, radarContainer);
+        }
+    }
+
+    addThreatBlip(isTemporary = false, container = null) {
+        if (!container) {
+            container = document.querySelector('.radar-display');
+        }
+        if (!container) return;
+
+        const blip = document.createElement('div');
+        blip.className = `threat-blip threat-${this.getRandomThreatLevel()}`;
+        
+        // Position randomly on radar
+        const angle = Math.random() * 360;
+        const radius = 30 + Math.random() * 60; // 30-90px from center
+        const x = 50 + Math.cos(angle * Math.PI / 180) * radius;
+        const y = 50 + Math.sin(angle * Math.PI / 180) * radius;
+        
+        blip.style.position = 'absolute';
+        blip.style.left = `${x}%`;
+        blip.style.top = `${y}%`;
+        blip.style.transform = 'translate(-50%, -50%)';
+        
+        container.appendChild(blip);
+        
+        // Remove temporary blips after animation
+        if (isTemporary) {
+            setTimeout(() => {
+                blip.remove();
+            }, 5000);
+        }
+    }
+
+    getRandomThreatLevel() {
+        const levels = ['low', 'low', 'medium', 'medium', 'high', 'critical'];
+        return levels[Math.floor(Math.random() * levels.length)];
+    }
+
+    animateRadarElements() {
+        // Add pulsing effect to threat blips
+        document.querySelectorAll('.threat-blip').forEach((blip, index) => {
+            blip.style.animationDelay = `${index * 0.5}s`;
+        });
+    }
+
+    showThreatNotification() {
+        // Create temporary notification
+        const notification = document.createElement('div');
+        notification.className = 'threat-notification';
+        notification.innerHTML = `
+            <div class="notification-content">
+                <i class="fas fa-shield-alt"></i>
+                <span>THREAT NEUTRALIZED</span>
+            </div>
+        `;
+        
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            z-index: 1000;
+            animation: slideIn 0.5s ease-out, fadeOut 0.5s ease-out 2s forwards;
+            backdrop-filter: blur(10px);
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+
+    updateParallaxEffect() {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5;
+        
+        const radarBg = document.querySelector('.radar-grid-bg');
+        if (radarBg) {
+            radarBg.style.transform = `translateY(${rate}px)`;
+        }
+    }
+
+    async checkAuthStatus() {
+        try {
+            const response = await fetch('/api/auth/me', {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+                }
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                if (data.authenticated) {
+                    this.isAuthenticated = true;
+                    this.currentUser = data.user;
+                    this.updateAuthenticatedUI();
+                }
+            }
+        } catch (error) {
+            console.log('Not authenticated');
+        }
+    }
+
+    updateAuthenticatedUI() {
+        const loginBtn = document.getElementById('loginBtn');
+        if (loginBtn && this.currentUser) {
+            loginBtn.textContent = `DASHBOARD`;
+            loginBtn.onclick = () => {
+                window.location.href = '/dashboard';
+            };
+        }
+    }
+
+    showLoginModal() {
+        // Create modal overlay
+        const modal = document.createElement('div');
+        modal.className = 'login-modal-overlay';
+        modal.innerHTML = `
+            <div class="login-modal glass-panel">
+                <div class="login-header">
+                    <h3>ZRO-DAY SECURITY ACCESS</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="login-form">
+                    <div class="form-group">
+                        <label>EMAIL ADDRESS</label>
+                        <input type="email" id="loginEmail" class="radar-input" placeholder="operative@zro-day.com">
+                    </div>
+                    <div class="form-group">
+                        <label>ACCESS CODE</label>
+                        <input type="password" id="loginPassword" class="radar-input" placeholder="••••••••">
+                    </div>
+                    <div class="form-actions">
+                        <button class="radar-button login-btn">ACCESS GRANTED</button>
+                        <button class="radar-button register-btn">REQUEST ACCESS</button>
+                    </div>
+                    <div class="login-footer">
+                        <a href="#" class="forgot-link">Forgot Access Code?</a>
+                    </div>
+                </div>
+                <div class="login-status" id="loginStatus"></div>
+            </div>
+        `;
+        
+        // Add styles
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(5px);
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Event listeners for modal
+        modal.querySelector('.close-modal').addEventListener('click', () => modal.remove());
+        modal.querySelector('.login-btn').addEventListener('click', () => this.handleLogin());
+        modal.querySelector('.register-btn').addEventListener('click', () => this.handleRegister());
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.remove();
+        });
+    }
+
+    async handleLogin() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const status = document.getElementById('loginStatus');
+        
+        if (!email || !password) {
+            this.showStatus('Please enter email and password', 'error');
+            return;
+        }
+        
+        try {
+            this.showStatus('AUTHENTICATING...', 'loading');
+            
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                localStorage.setItem('auth_token', data.token);
+                this.showStatus('ACCESS GRANTED - REDIRECTING...', 'success');
+                setTimeout(() => {
+                    window.location.href = '/dashboard';
+                }, 1500);
+            } else {
+                this.showStatus(data.message || 'Authentication failed', 'error');
+            }
+        } catch (error) {
+            this.showStatus('Connection failed - please try again', 'error');
+        }
+    }
+
+    async handleRegister() {
+        // Redirect to registration form
+        window.location.href = '/#register';
+    }
+
+    showStatus(message, type) {
+        const status = document.getElementById('loginStatus');
+        if (status) {
+            status.textContent = message;
+            status.className = `login-status ${type}`;
+        }
+    }
+
+    handleExtensionInstall() {
+        // Check if Chrome extension API is available
+        if (window.chrome && chrome.webstore) {
+            // Production Chrome Web Store installation
+            const extensionId = 'your-extension-id-here';
+            chrome.webstore.install(`https://chrome.google.com/webstore/detail/${extensionId}`, 
+                () => {
+                    this.showInstallSuccess();
+                },
+                (error) => {
+                    this.showInstallError(error);
+                }
+            );
+        } else {
+            // Fallback for development or other browsers
+            this.handleExtensionDownload();
+        }
+    }
+
+    handleExtensionDownload() {
+        // Create download link for development
+        const link = document.createElement('a');
+        link.href = '/zro-day-extension.zip';
+        link.download = 'zro-day-security-extension.zip';
+        link.textContent = 'Download ZRO-DAY Extension';
+        
+        // Show installation instructions
+        this.showInstallInstructions();
+    }
+
+    showInstallInstructions() {
+        const modal = document.createElement('div');
+        modal.className = 'install-modal-overlay';
+        modal.innerHTML = `
+            <div class="install-modal glass-panel">
+                <div class="install-header">
+                    <h3>EXTENSION INSTALLATION</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="install-content">
+                    <h4>Manual Installation Instructions:</h4>
+                    <ol>
+                        <li>Download the extension package</li>
+                        <li>Open Chrome and go to <code>chrome://extensions/</code></li>
+                        <li>Enable "Developer mode" in the top right</li>
+                        <li>Click "Load unpacked" and select the extension folder</li>
+                        <li>Pin the ZRO-DAY extension to your toolbar</li>
+                    </ol>
+                    <div class="install-actions">
+                        <a href="/zro-day-extension.zip" class="radar-button download-btn" download>
+                            📦 DOWNLOAD PACKAGE
+                        </a>
+                        <button class="radar-button" onclick="window.open('chrome://extensions/', '_blank')">
+                            🔧 OPEN EXTENSIONS PAGE
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            backdrop-filter: blur(5px);
+        `;
+        
+        document.body.appendChild(modal);
+        
+        modal.querySelector('.close-modal').addEventListener('click', () => modal.remove());
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.remove();
+        });
+    }
+
+    async performQuickScan() {
+        const scanBtn = document.getElementById('startScan');
+        if (!scanBtn) return;
+        
+        const originalText = scanBtn.innerHTML;
+        scanBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>SCANNING...';
+        scanBtn.disabled = true;
+        
+        try {
+            // Simulate scan process
+            await this.simulateScanProcess();
+            
+            scanBtn.innerHTML = '<i class="fas fa-check mr-2"></i>SCAN COMPLETE';
+            scanBtn.style.backgroundColor = '#00ff41';
+            scanBtn.style.color = '#000';
+            
+            // Show scan results
+            this.showScanResults();
+            
+        } catch (error) {
+            scanBtn.innerHTML = '<i class="fas fa-times mr-2"></i>SCAN FAILED';
+            scanBtn.style.backgroundColor = '#ff0000';
+        } finally {
+            setTimeout(() => {
+                scanBtn.innerHTML = originalText;
+                scanBtn.disabled = false;
+                scanBtn.style.backgroundColor = '';
+                scanBtn.style.color = '';
+            }, 3000);
+        }
+    }
+
+    async simulateScanProcess() {
+        // Simulate scanning progress
+        return new Promise(resolve => {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    resolve();
+                }
+            }, 200);
+        });
+    }
+
+    showScanResults() {
+        const threatsFound = Math.floor(Math.random() * 3);
+        const message = threatsFound === 0 ? 
+            'NO THREATS DETECTED - SYSTEM SECURE' :
+            `${threatsFound} POTENTIAL THREATS FOUND`;
+        
+        this.showThreatNotification();
+    }
+}
+
+// CSS Animations (injected dynamically)
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+    
+    .radar-input {
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid #00ff41;
+        color: #00ff41;
+        padding: 10px;
+        font-family: 'Courier New', monospace;
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .radar-input:focus {
+        outline: none;
+        border-color: #ffb000;
+        box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        display: block;
+        color: #00ff41;
+        font-size: 12px;
+        margin-bottom: 5px;
+        letter-spacing: 1px;
+    }
+    
+    .form-actions {
+        display: flex;
+        gap: 10px;
+        margin: 20px 0;
+    }
+    
+    .form-actions button {
+        flex: 1;
+    }
+    
+    .login-status {
+        text-align: center;
+        padding: 10px;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+    
+    .login-status.loading { color: #ffb000; }
+    .login-status.success { color: #00ff41; }
+    .login-status.error { color: #ff0000; }
+    
+    .forgot-link {
+        color: #00ff41;
+        text-decoration: none;
+        font-size: 11px;
+    }
+    
+    .forgot-link:hover {
+        color: #ffb000;
+    }
+`;
+document.head.appendChild(style);
+
+// Initialize the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const app = new ZroDayApp();
+});
+
+console.log('ZRO-DAY Security Platform: JavaScript loaded');

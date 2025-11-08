@@ -1,0 +1,20 @@
+{
+  "name": "zro-day-backend",
+  "version": "1.0.0",
+  "description": "Distributed Computing Backend for Zro-Day Cybersecurity Platform",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@cloudflare/workers-types": "^4.20231031.0",
+    "itty-router": "^4.0.0"
+  },
+  "devDependencies": {
+    "vitest": "^0.34.6",
+    "wrangler": "^3.17.1",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,20 @@
+name = "zroday-backend"
+compatibility_date = "2025-06-01"
+main = "src/index.ts"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "prod-zroday-d1"
+database_id = "367b979c-ff96-4608-ac4a-fa9f71f2a9d9" # <-- add this if you already created the DB
+
+[assets]
+binding = "ASSETS"
+directory = "../frontend/dist"
+not_found_handling = "single-page-application"
+
+[vars]
+SMTP_HOST = "smtp.example.com"
+SMTP_PORT = 587
+SMTP_USER = "smtp-user"
+SMTP_PASS = "smtp-pass"
+EMAIL_FROM = "zro-day <noreply@zro-day.com>"

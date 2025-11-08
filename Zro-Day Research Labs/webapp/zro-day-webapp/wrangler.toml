@@ -1,0 +1,4 @@
+name = "zro-day-webapp"
+compatibility_date = "2024-01-01"
+account_id = "your-cloudflare-account-id"
+pages_build_output_dir = "dist"

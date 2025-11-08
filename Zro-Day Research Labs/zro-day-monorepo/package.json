@@ -1,0 +1,16 @@
+{
+  "name": "zro-day-monorepo",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "pnpm -r run build",
+    "dev": "pnpm -r run dev",
+    "deploy-backend": "pnpm --filter @zroday/backend run deploy"
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6",
+    "eslint": "^8.43.0",
+    "prettier": "^3.0.0",
+    "pnpm": "^8.5.0"
+  }
+}

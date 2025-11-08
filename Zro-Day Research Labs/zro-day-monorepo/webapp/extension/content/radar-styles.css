@@ -1,0 +1,305 @@
+/* ZRO-DAY Security Extension - Radar Theme Styles */
+/* 1950s Military Radar Operator Aesthetic */
+
+.zro-day-threat-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.95) !important;
+    z-index: 2147483647 !important; /* Maximum z-index */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-family: 'Courier New', monospace !important;
+    backdrop-filter: blur(5px) !important;
+}
+
+.zro-day-threat-modal {
+    background: linear-gradient(135deg, #001100 0%, #000000 100%) !important;
+    border: 3px solid #00ff41 !important;
+    border-radius: 10px !important;
+    max-width: 500px !important;
+    width: 90% !important;
+    padding: 0 !important;
+    box-shadow: 
+        0 0 30px rgba(0, 255, 65, 0.5),
+        inset 0 0 20px rgba(0, 255, 65, 0.1) !important;
+    animation: zro-day-radar-pulse 2s ease-in-out infinite alternate !important;
+    color: #00ff41 !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+}
+
+@keyframes zro-day-radar-pulse {
+    0% { box-shadow: 0 0 30px rgba(0, 255, 65, 0.3), inset 0 0 20px rgba(0, 255, 65, 0.1); }
+    100% { box-shadow: 0 0 50px rgba(0, 255, 65, 0.7), inset 0 0 30px rgba(0, 255, 65, 0.2); }
+}
+
+.zro-day-threat-header {
+    background: linear-gradient(90deg, #002200 0%, #001100 100%) !important;
+    padding: 20px !important;
+    border-bottom: 2px solid #00ff41 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: relative !important;
+}
+
+.zro-day-threat-header::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 2px !important;
+    background: linear-gradient(90deg, transparent 0%, #00ff41 50%, transparent 100%) !important;
+    animation: zro-day-scan-line 2s linear infinite !important;
+}
+
+@keyframes zro-day-scan-line {
+    0% { transform: translateX(-100%); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateX(100%); opacity: 0; }
+}
+
+.zro-day-threat-icon {
+    font-size: 24px !important;
+    margin-right: 15px !important;
+    animation: zro-day-blink 1s ease-in-out infinite alternate !important;
+    filter: drop-shadow(0 0 10px #ffff00) !important;
+}
+
+@keyframes zro-day-blink {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.zro-day-threat-title {
+    flex: 1 !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    letter-spacing: 2px !important;
+    color: #ff0000 !important;
+    text-shadow: 0 0 10px #ff0000 !important;
+    animation: zro-day-shimmer 3s ease-in-out infinite !important;
+}
+
+@keyframes zro-day-shimmer {
+    0%, 100% { text-shadow: 0 0 10px #ff0000; }
+    50% { text-shadow: 0 0 20px #ff0000, 0 0 30px #ff4400; }
+}
+
+.zro-day-threat-close {
+    background: transparent !important;
+    border: 2px solid #ff0000 !important;
+    color: #ff0000 !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+.zro-day-threat-close:hover {
+    background: #ff0000 !important;
+    color: #000 !important;
+    box-shadow: 0 0 15px #ff0000 !important;
+    transform: scale(1.1) !important;
+}
+
+.zro-day-threat-message {
+    padding: 25px !important;
+    background: rgba(0, 0, 0, 0.7) !important;
+    border-left: 4px solid #00ff41 !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #00ff41 !important;
+    position: relative !important;
+}
+
+.zro-day-threat-message::before {
+    content: '⚡' !important;
+    position: absolute !important;
+    top: 10px !important;
+    right: 15px !important;
+    font-size: 20px !important;
+    color: #ffff00 !important;
+    animation: zro-day-spark 0.5s ease-in-out infinite alternate !important;
+}
+
+@keyframes zro-day-spark {
+    0% { transform: rotate(0deg) scale(1); }
+    100% { transform: rotate(180deg) scale(1.2); }
+}
+
+.zro-day-threat-actions {
+    padding: 20px !important;
+    display: flex !important;
+    gap: 15px !important;
+    justify-content: center !important;
+    background: rgba(0, 20, 0, 0.5) !important;
+}
+
+.zro-day-btn {
+    padding: 12px 24px !important;
+    font-family: 'Courier New', monospace !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    letter-spacing: 1px !important;
+    border: 2px solid !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    min-width: 180px !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.zro-day-btn::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+    transition: left 0.5s !important;
+}
+
+.zro-day-btn:hover::before {
+    left: 100% !important;
+}
+
+.zro-day-btn-danger {
+    border-color: #00ff41 !important;
+    color: #00ff41 !important;
+}
+
+.zro-day-btn-danger:hover {
+    background: #00ff41 !important;
+    color: #000 !important;
+    box-shadow: 0 0 20px #00ff41 !important;
+    transform: translateY(-2px) !important;
+}
+
+.zro-day-btn-secondary {
+    border-color: #ff6600 !important;
+    color: #ff6600 !important;
+}
+
+.zro-day-btn-secondary:hover {
+    background: #ff6600 !important;
+    color: #000 !important;
+    box-shadow: 0 0 20px #ff6600 !important;
+    transform: translateY(-2px) !important;
+}
+
+.zro-day-threat-footer {
+    background: #000 !important;
+    padding: 12px !important;
+    text-align: center !important;
+    font-size: 12px !important;
+    color: rgba(0, 255, 65, 0.7) !important;
+    border-top: 1px solid rgba(0, 255, 65, 0.3) !important;
+    letter-spacing: 1px !important;
+    position: relative !important;
+}
+
+.zro-day-threat-footer::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 1px !important;
+    background: linear-gradient(90deg, transparent 0%, #00ff41 50%, transparent 100%) !important;
+    animation: zro-day-footer-scan 4s linear infinite !important;
+}
+
+@keyframes zro-day-footer-scan {
+    0% { transform: scaleX(0); }
+    50% { transform: scaleX(1); }
+    100% { transform: scaleX(0); }
+}
+
+/* Radar grid background effect */
+.zro-day-threat-modal::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(0, 255, 65, 0.1) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px) !important;
+    background-size: 20px 20px, 20px 20px, 20px 20px !important;
+    pointer-events: none !important;
+    opacity: 0.3 !important;
+    z-index: -1 !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    .zro-day-threat-modal {
+        width: 95% !important;
+        margin: 20px !important;
+    }
+    
+    .zro-day-threat-actions {
+        flex-direction: column !important;
+    }
+    
+    .zro-day-btn {
+        width: 100% !important;
+        min-width: auto !important;
+    }
+    
+    .zro-day-threat-title {
+        font-size: 16px !important;
+    }
+    
+    .zro-day-threat-message {
+        font-size: 14px !important;
+        padding: 20px !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .zro-day-threat-overlay {
+        background: rgba(0, 0, 0, 1) !important;
+    }
+    
+    .zro-day-threat-modal {
+        border-width: 4px !important;
+    }
+    
+    .zro-day-threat-title {
+        text-shadow: none !important;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .zro-day-threat-modal,
+    .zro-day-threat-icon,
+    .zro-day-threat-title,
+    .zro-day-threat-header::before,
+    .zro-day-threat-message::before,
+    .zro-day-threat-footer::after {
+        animation: none !important;
+    }
+    
+    .zro-day-btn::before {
+        display: none !important;
+    }
+}
