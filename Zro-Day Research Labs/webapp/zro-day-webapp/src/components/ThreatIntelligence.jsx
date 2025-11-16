@@ -248,8 +248,9 @@ const ThreatIntelligence = () => {
                   <p className="text-purple-400 text-xs">(24,940/hour)</p>
                 </div>
                 <Zap className="h-8 w-8 text-purple-400" />
-              </CardContent>
-            </Card>
+              </div>
+            </CardContent>
+          </Card>
 
           <Card className="bg-black/40 backdrop-blur-sm border-gray-700">
             <CardContent className="p-6">
