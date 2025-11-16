@@ -86,8 +86,9 @@ const ThreatGlobe = ({ fullscreen = false }) => {
       // Longitude lines
       for (let i = 0; i < 12; i++) {
         const angle = (i / 12) * Math.PI * 2 + globeRotation
+        const radiusX = Math.abs(radius * Math.cos(angle))
         ctx.beginPath()
-        ctx.ellipse(centerX, centerY, radius * Math.cos(angle), radius, angle, 0, Math.PI * 2)
+        ctx.ellipse(centerX, centerY, radiusX, radius, angle, 0, Math.PI * 2)
         ctx.stroke()
       }
       
