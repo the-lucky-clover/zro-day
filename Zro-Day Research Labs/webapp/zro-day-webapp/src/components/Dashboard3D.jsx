@@ -688,12 +688,6 @@ const NetworkNexusView = ({ stats }) => {
   const [networkData, setNetworkData] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetchNetworkData()
-    const interval = setInterval(fetchNetworkData, 5000) // Refresh every 5 seconds
-    return () => clearInterval(interval)
-  }, [])
-
   const fetchNetworkData = async () => {
     try {
       // In a real app, this would fetch from Cloudflare Workers API
@@ -719,6 +713,13 @@ const NetworkNexusView = ({ stats }) => {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    fetchNetworkData()
+    const interval = setInterval(fetchNetworkData, 5000) // Refresh every 5 seconds
+    return () => clearInterval(interval)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const distributeTask = async () => {
     try {

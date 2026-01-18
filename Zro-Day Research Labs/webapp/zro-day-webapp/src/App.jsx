@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import LandingPage from './components/LandingPage'
 import Dashboard from './components/Dashboard'
 import AuthModal from './components/AuthModal'
+import Contact from './components/Contact'
 import './App.css'
 
 function App() {
